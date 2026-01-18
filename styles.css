@@ -8,6 +8,7 @@
     --accent: #d63f3f;
     --border: #d3d3d3;
     --table-header-bg: #f2f2f2;
+    --bg-image: url('images/lightmodebg.png');
 }
 
 /* DARK MODE */
@@ -17,6 +18,7 @@
     --accent: #ff5f5f;
     --border: #555;
     --table-header-bg: #2a2a2a;
+    --bg-image: url('images/darkmodebg.png');
 }
 
 /* RESET */
@@ -29,8 +31,14 @@
 
 body {
     background-color: var(--bg);
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--text);
-    padding: 20px;
+    height: 100%;
+    min-height: 100vh;
+
 }
 
 /* HEADER */
@@ -39,11 +47,18 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 40px;
-    background-color: var(--bg);
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
     position: sticky;
     top: 0;
     z-index: 999;
+    width: 100%;
+    height: 10vh;
+}
+
+#header h3 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 /* TOGGLE TEMA */
@@ -113,7 +128,7 @@ p {
     width: 100%;
     border-radius: 10px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* TABELLA */
@@ -124,7 +139,8 @@ table {
     font-size: 18px;
 }
 
-th, td {
+th,
+td {
     border: 2px solid var(--border);
     padding: 12px;
     text-align: center;
