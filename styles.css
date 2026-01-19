@@ -309,6 +309,55 @@ p {
 }
 
 
+/* COUNTDOWN */
+.countdown-container {
+    width: 100%;
+    text-align: center;
+    padding: 30px 20px 10px;
+    background: transparent;
+}
+
+.countdown-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 15px !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+}
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+    padding: 10px;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.countdown-item span {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.countdown-item label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.6;
+    margin-top: 5px;
+}
+
 /* GRID CALENDARIO */
 .calendar-grid {
     display: grid;
@@ -326,19 +375,42 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
-    font-weight: 700;
+    position: relative;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    color: var(--text);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
 }
 
-.day-box:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent);
+.day-box i.fa-gift {
+    font-size: 4rem;
     color: var(--accent);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    opacity: 0.2;
+    transition: all 0.3s ease;
+}
+
+.day-box span {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text);
+    z-index: 1;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.dark-theme .day-box span {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.day-box:hover i.fa-gift {
+    transform: scale(1.2) rotate(10deg);
+    opacity: 0.4;
+}
+
+.day-box:hover span {
+    transform: scale(1.1);
+    color: var(--accent);
 }
 
 .day-span-2 {
@@ -358,14 +430,96 @@ p {
     aspect-ratio: auto;
     height: 140px;
     background-color: var(--accent);
-    color: #fff;
     border: none;
+}
+
+.day-big i.fa-gift {
+    font-size: 6rem;
+    color: #fff;
+    opacity: 0.3;
+}
+
+.day-big span {
+    color: #fff;
     font-size: 2.5rem;
 }
 
-.day-big:hover {
+.day-big:hover i.fa-gift {
+    opacity: 0.5;
+}
+
+.day-big:hover span {
     color: #fff;
-    filter: brightness(1.1);
+}
+
+/* MODAL */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--bg);
+    padding: 40px;
+    border-radius: 30px;
+    border: 3px solid var(--box-border);
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    min-height: 300px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    transform: scale(0.7);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+    padding: 5px;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: var(--accent);
+    transform: rotate(90deg);
+}
+
+#modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
 }
 
 /* MEDIA QUERIES */
@@ -478,6 +632,36 @@ p {
         background-color: rgba(255, 255, 255, 0.05);
     }
 
+    /* COUNTDOWN MOBILE */
+    .countdown-container {
+        padding: 15px 10px 5px;
+    }
+
+    .countdown-title {
+        font-size: 0.85rem;
+        margin-bottom: 10px !important;
+        letter-spacing: 1px;
+    }
+
+    #countdown {
+        gap: 8px;
+    }
+
+    .countdown-item {
+        min-width: 60px;
+        padding: 8px 5px;
+        border-radius: 10px;
+    }
+
+    .countdown-item span {
+        font-size: 1.2rem;
+    }
+
+    .countdown-item label {
+        font-size: 0.6rem;
+        margin-top: 2px;
+    }
+
 
     .calendar-grid {
         padding: 15px;
@@ -485,8 +669,15 @@ p {
     }
 
     .day-box {
-        font-size: 1.2rem;
         border-width: 2px;
+    }
+
+    .day-box i.fa-gift {
+        font-size: 2.5rem;
+    }
+
+    .day-box span {
+        font-size: 1.2rem;
     }
 
     .day-span-2,
@@ -497,6 +688,13 @@ p {
 
     .day-big {
         height: 100px;
+    }
+
+    .day-big i.fa-gift {
+        font-size: 4rem;
+    }
+
+    .day-big span {
         font-size: 1.8rem;
     }
 

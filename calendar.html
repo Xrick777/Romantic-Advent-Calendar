@@ -45,25 +45,51 @@
             </a>
 
             <div class="san-valentino calendar-card-full">
+                <!-- Countdown Timer -->
+                <div class="countdown-container">
+                    <p class="countdown-title">Manca al prossimo regalo:</p>
+                    <div id="countdown">
+                        <div class="countdown-item"><span id="days">00</span><label>Giorni</label></div>
+                        <div class="countdown-item"><span id="hours">00</span><label>Ore</label></div>
+                        <div class="countdown-item"><span id="minutes">00</span><label>Minuti</label></div>
+                        <div class="countdown-item"><span id="seconds">00</span><label>Secondi</label></div>
+                    </div>
+                </div>
+
                 <div class="calendar-grid">
-                    <div class="day-box">1</div>
-                    <div class="day-box">2</div>
-                    <div class="day-box">3</div>
-                    <div class="day-box">4</div>
-                    <div class="day-box">5</div>
-                    <div class="day-box">6</div>
-                    <div class="day-box">7</div>
-                    <div class="day-box">8</div>
-                    <div class="day-box day-span-2">9</div>
-                    <div class="day-box day-span-2">10</div>
-                    <div class="day-box day-span-2">11</div>
-                    <div class="day-box day-span-2">12</div>
-                    <div class="day-box day-span-4">13</div>
-                    <div class="day-box day-big">14 <i class="fas fa-heart" style="margin-left: 10px;"></i></div>
+                    <div class="day-box"><i class="fa-solid fa-gift"></i><span>1</span></div>
+                    <div class="day-box"><i class="fa-solid fa-gift"></i><span>2</span></div>
+                    <div class="day-box"><i class="fa-solid fa-gift"></i><span>3</span></div>
+                    <div class="day-box"><i class="fa-solid fa-gift"></i><span>4</span></div>
+                    <div class="day-box"><i class="fa-solid fa-gift"></i><span>5</span></div>
+                    <div class="day-box"><i class="fa-solid fa-gift"></i><span>6</span></div>
+                    <div class="day-box"><i class="fa-solid fa-gift"></i><span>7</span></div>
+                    <div class="day-box"><i class="fa-solid fa-gift"></i><span>8</span></div>
+                    <div class="day-box day-span-2"><i class="fa-solid fa-gift"></i><span>9</span></div>
+                    <div class="day-box day-span-2"><i class="fa-solid fa-gift"></i><span>10</span></div>
+                    <div class="day-box day-span-2"><i class="fa-solid fa-gift"></i><span>11</span></div>
+                    <div class="day-box day-span-2"><i class="fa-solid fa-gift"></i><span>12</span></div>
+                    <div class="day-box day-span-4"><i class="fa-solid fa-gift"></i><span>13</span></div>
+                    <div class="day-box day-big">
+                        <i class="fa-solid fa-gift"></i>
+                        <span>14 <i class="fas fa-heart" style="margin-left: 10px;"></i></span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Modal per i giorni del calendario -->
+    <div id="day-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-modal" class="close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-body">
+                <!-- Il contenuto verrà inserito via JS -->
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
