@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Calendario di San Valentino</title>
+    <title>Calendario - San Valentino</title>
 
     <!-- Script bloccante per prevenire il flash della light mode -->
     <script>
@@ -20,19 +20,13 @@
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-
     <link rel="stylesheet" href="styles.css">
-
     <script src="script.js" defer></script>
-
 </head>
 
 <body>
     <section id="header">
-
-        <h3><i class="fa-brands fa-gratipay"></i> <span class="header-text">Calendario
-                dell'amore</span></h3>
-
+        <h3><i class="fa-brands fa-gratipay"></i> <span class="header-text">Calendario dell'amore</span></h3>
         <div>
             <input type="checkbox" class="checkbox" id="checkbox">
             <label for="checkbox" class="checkbox-label">
@@ -41,34 +35,19 @@
                 <span class="ball"></span>
             </label>
         </div>
-
     </section>
 
     <section id="main-form">
-        <div class="container">
-            <a href="calendar.html" class="card-link">
-                <div class="san-valentino home-card">
-                    <div class="card-info">
-                        <div class="card-text-group">
-                            <h2>Calendario di San Valentino</h2>
-                            <p class="recipient">per Trifan Teodora</p>
-                            <p class="progress">0/14 giorni riscattati</p>
-                        </div>
-                        <div class="card-icon">
-                            <i class="fa-solid fa-envelope fa-bounce"></i>
-                        </div>
-                    </div>
-                </div>
+        <div class="container calendar-page-container">
+            <!-- Ritorno alla home -->
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Torna alla Home
             </a>
-        </div>
 
-        <div class="container">
-            <div class="pasqua">
-                <img src="images/heresemptylight.png" id="empty-image" alt="In arrivo">
+            <div class="san-valentino calendar-card-full">
             </div>
         </div>
     </section>
-
-
-
 </body>
+
+</html>

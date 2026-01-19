@@ -12,10 +12,13 @@
     --header-shadow: rgba(0, 0, 0, 0.08);
     --empty-img: url('images/heresemptylight.png');
     --box-border: #000200da;
+    --ball-color: #fff;
+    --label-color: #111;
 }
 
 /* DARK MODE */
-.dark-theme {
+.dark-theme,
+:root.dark-theme {
     --bg: #1a1a1ac0;
     --text: #f2f2f2;
     --accent: #ff5f5f;
@@ -25,14 +28,16 @@
     --header-shadow: rgb(255 255 255 / 8%);
     --empty-img: url('images/heresemptydark.png');
     --box-border: #d9d8d7ee;
+    --ball-color: #111;
+    --label-color: #ffffff;
 }
 
-/* RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Jost', sans-serif;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -44,10 +49,9 @@ body {
     color: var(--text);
     height: 100%;
     min-height: 100vh;
-
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* HEADER */
 #header {
     display: flex;
     justify-content: space-between;
@@ -57,12 +61,18 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 3px 10px var(--header-shadow);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
     z-index: 999;
     width: 100%;
     height: 90px;
-    transition: background-color 0.3s ease, padding 0.3s ease;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
+}
+
+#header.nav-up {
+    transform: translateY(-100%);
 }
 
 #header h3 {
@@ -72,8 +82,16 @@ body {
     font-size: 1.5rem;
 }
 
-
-
+#header h3 i {
+    font-size: 40px;
+    background: linear-gradient(90deg, rgba(153, 0, 0, 1) 0%, rgba(71, 0, 0, 1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
+    /* Necessario per alcuni browser per applicare il clip correttamente */
+}
 
 #header .checkbox {
     position: absolute;
@@ -81,7 +99,7 @@ body {
 }
 
 .checkbox-label {
-    background-color: #111;
+    background-color: var(--label-color);
     width: 50px;
     height: 26px;
     border-radius: 50px;
@@ -95,7 +113,7 @@ body {
 }
 
 .fa-moon {
-    color: #f1c40f;
+    color: #ffd52d;
 
 }
 
@@ -105,7 +123,7 @@ body {
 }
 
 .checkbox-label .ball {
-    background-color: #fff;
+    background-color: var(--ball-color);
     width: 22px;
     height: 22px;
     position: absolute;
@@ -116,18 +134,15 @@ body {
 
 }
 
-
 .checkbox:checked+.checkbox-label .ball {
     transform: translateX(24px);
 
 }
 
-
 #main-form {
     width: 70%;
     height: 90vh;
-    margin: 0 auto;
-
+    margin: 130px auto 0;
 }
 
 .container {
@@ -142,8 +157,23 @@ body {
     height: 100%;
     background-color: var(--bg);
     border-radius: 25px;
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.062);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border: 3px solid var(--box-border);
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.san-valentino:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.san-valentino:active {
+    transform: scale(0.98);
 }
 
 .pasqua {
@@ -179,47 +209,100 @@ p {
     color: var(--text);
 }
 
-/* MAPPA */
-#mappa {
-    height: 400px;
-    width: 100%;
-    border-radius: 10px;
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.back-link {
+    text-decoration: none;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-}
-
-/* TABELLA */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    font-size: 18px;
-}
-
-th,
-td {
-    border: 2px solid var(--border);
-    padding: 12px;
-    text-align: center;
-}
-
-th {
-    background-color: var(--table-header-bg);
     font-weight: 600;
+    transition: transform 0.2s ease;
 }
 
-td {
-    background-color: var(--bg);
+.back-link:hover {
+    transform: translateX(-5px);
+}
+
+.calendar-page-container {
+    height: auto !important;
+}
+
+.calendar-card-full {
+    height: 75vh !important;
+    cursor: default !important;
+    transform: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.calendar-card-full:hover {
+    transform: none !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.home-card {
+    background-image: url('images/stvalentine.png');
+    background-size: 60% auto;
+    background-position: left center;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 40px 40px 40px;
+    /* Ridotto padding superiore per alzare le scritte */
+}
+
+.card-info {
+    width: 35%;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-info h2 {
+    font-size: 1.8rem;
+    color: var(--accent);
+    line-height: 1.2;
+}
+
+.card-info .recipient {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.card-info .progress {
+    font-size: 1rem;
+    color: var(--text);
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+.card-icon {
+    display: flex;
+    justify-content: center;
+    /* Centra l'icona orizzontalmente rispetto al div delle scritte */
+    padding-top: 25px;
+    font-size: 3.5rem;
+    color: var(--accent);
 }
 
 @media (max-width: 768px) {
     #header {
         padding: 0 40px;
         height: 100px;
-    }
-
-    #header h3 {
-        gap: 0;
+        /* Rimuovo la transition specifica qui per usare quella globale che gestisce il nav-up */
     }
 
     #header h3 i {
@@ -230,20 +313,17 @@ td {
         display: none;
     }
 
-    /* Ingrandimento Toggle */
+    /* Toggle più grande su mobile come richiesto */
     .checkbox-label {
         width: 75px;
         height: 38px;
         padding: 0 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
 
     .checkbox-label .ball {
         width: 32px;
         height: 32px;
-        left: 3px;
+        left: 4px;
         top: 3px;
     }
 
@@ -256,8 +336,73 @@ td {
         font-size: 18px;
     }
 
+    .home-card {
+        background-image: url('images/stvalentinemobile.png');
+        background-size: 130% auto;
+        background-position: top center;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0 20px 20px 20px;
+    }
+
+    .card-info {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        /* Affianca testi e icona */
+        justify-content: space-between;
+        align-items: flex-end;
+        text-align: left;
+        background: transparent;
+        /* Rimuove il div "in mezzo" */
+        backdrop-filter: none;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .card-text-group {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .card-info h2 {
+        font-size: 1.2rem;
+        margin: 0;
+        color: var(--accent);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-info .recipient,
+    .card-info .progress {
+        font-size: 0.85rem;
+        margin: 0;
+    }
+
+    .card-icon {
+        padding-top: 0;
+        font-size: 2.8rem;
+        display: flex;
+        align-items: flex-end;
+    }
+
     #main-form {
         width: 90%;
+        margin-top: 140px;
+    }
+
+    .san-valentino:active {
+        transform: scale(0.96);
+        background-color: rgba(255, 255, 255, 0.05);
+        transition: transform 0.1s ease;
+    }
+
+    .dark-theme .san-valentino:active {
+        background-color: rgba(255, 255, 255, 0.05);
     }
 
     h1 {
