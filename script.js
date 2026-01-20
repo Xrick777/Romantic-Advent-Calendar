@@ -50,7 +50,17 @@ if (dayBoxes.length > 0 && modal) {
         box.addEventListener("click", () => {
             const dayNumber = box.innerText;
             // Qui puoi personalizzare il contenuto del modal in base al giorno
-            modalBody.innerHTML = `<h2>Giorno ${dayNumber}</h2><p>Contenuto speciale per il giorno delle coccole!</p>`;
+            modalBody.innerHTML = `
+                <h2>Giorno ${dayNumber}</h2>
+                <div class="modal-gift-container">
+                    <div class="vibration-fx left"></div>
+                    <div class="modal-gift-image"></div>
+                    <div class="vibration-fx right"></div>
+                    <div class="gift-shadow"></div>
+                </div>
+                <p>Apri il regalo per scoprire il contenuto speciale!</p>
+                <button class="claim-btn">Riscatta</button>
+            `;
             modal.classList.add("active");
             document.body.style.overflow = "hidden"; // Previene lo scroll della pagina
         });
