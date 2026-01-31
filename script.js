@@ -2,14 +2,14 @@
 // FIREBASE CONFIGURATION
 // ========================
 const firebaseConfig = {
-    apiKey: "AIzaSyCPIKqcHyAmeRHmgMyYea_2yxRHv7vErxg",
-    authDomain: "romantic-advent-calendar.firebaseapp.com",
-    databaseURL: "https://romantic-advent-calendar-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "romantic-advent-calendar",
-    storageBucket: "romantic-advent-calendar.firebasestorage.app",
-    messagingSenderId: "545121258378",
-    appId: "1:545121258378:web:03f499721afa6dd8805673",
-    measurementId: "G-WW0GL67W09"
+    apiKey: "AIzaSyAtDQ4PAlBTWPw6TlTuo62WLG0ShwY1EtI",
+    authDomain: "romantic-advent-calendar-e599d.firebaseapp.com",
+    databaseURL: "https://romantic-advent-calendar-e599d-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "romantic-advent-calendar-e599d",
+    storageBucket: "romantic-advent-calendar-e599d.firebasestorage.app",
+    messagingSenderId: "60474076543",
+    appId: "1:60474076543:web:35ac54e461cac5cfecfe4a",
+    measurementId: "G-CQCYZNYVSM"
 };
 
 // ========================
