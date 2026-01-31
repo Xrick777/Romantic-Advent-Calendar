@@ -15,10 +15,10 @@ const firebaseConfig = {
 // Inizializza Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
-const letterineRef = database.ref('letterine');
 
 // Cache per i dati delle letterine (evita chiamate ripetute)
 let letterineCache = {};
+let letterineBasePath = 'letterine'; // Verrà aggiornato se necessario
 
 /**
  * Verifica se un giorno è disponibile per l'apertura
@@ -40,12 +40,33 @@ function isDayAvailable(dayNumber) {
 function initializeCalendar() {
     const dayBoxes = document.querySelectorAll(".day-box");
 
-    letterineRef.once('value').then((snapshot) => {
-        letterineCache = snapshot.val() || {};
+    // Prima controlliamo la struttura del database
+    database.ref('letterine').once('value').then((snapshot) => {
+        let data = snapshot.val() || {};
+
+        console.log('[Firebase] Dati grezzi ricevuti:', data);
+
+        // Auto-detect: se i dati hanno una sottoproprieta 'letterine', usiamo quella
+        // Questo succede se l'utente importa il JSON con "letterine" già come chiave
+        if (data.letterine && typeof data.letterine === 'object') {
+            console.log('[Firebase] Rilevata struttura annidata letterine/letterine');
+            letterineBasePath = 'letterine/letterine';
+            letterineCache = data.letterine;
+        } else if (data['1'] && data['1'].messaggio) {
+            // Struttura corretta: letterine/1, letterine/2, etc.
+            console.log('[Firebase] Struttura corretta rilevata');
+            letterineBasePath = 'letterine';
+            letterineCache = data;
+        } else {
+            console.warn('[Firebase] Struttura dati non riconosciuta:', data);
+            letterineCache = {};
+        }
+
+        console.log('[Firebase] letterineCache:', letterineCache);
+        console.log('[Firebase] letterineBasePath:', letterineBasePath);
 
         dayBoxes.forEach(box => {
             const dayNumber = box.innerText.trim().split('\n')[0].trim();
-            // Estrai solo il numero (rimuovi eventuali icone)
             const dayNum = dayNumber.match(/\d+/)?.[0];
 
             if (dayNum && letterineCache[dayNum]) {
@@ -55,7 +76,7 @@ function initializeCalendar() {
             }
         });
     }).catch((error) => {
-        console.error("Errore nel caricamento dati Firebase:", error);
+        console.error('[Firebase] Errore nel caricamento dati:', error);
     });
 }
 
@@ -174,10 +195,13 @@ if (dayBoxes.length > 0 && modal) {
             const dayNumber = dayText.match(/\d+/)?.[0] || "1";
 
             // Recupera i dati in tempo reale da Firebase
-            database.ref(`letterine/${dayNumber}`).once('value').then((snapshot) => {
+            // Usa letterineBasePath per gestire sia 'letterine' che 'letterine/letterine'
+            database.ref(`${letterineBasePath}/${dayNumber}`).once('value').then((snapshot) => {
                 const letterina = snapshot.val() || { messaggio: "Messaggio non disponibile", aperto: false };
                 const messaggio = letterina.messaggio;
                 const giaAperto = letterina.aperto === true;
+
+                console.log(`[Firebase] Giorno ${dayNumber}:`, { messaggio, giaAperto, isAvailable: isDayAvailable(parseInt(dayNumber)) });
 
                 // Verifica disponibilità data
                 const isAvailable = isDayAvailable(parseInt(dayNumber));
@@ -229,11 +253,16 @@ if (dayBoxes.length > 0 && modal) {
                     claimBtn.style.cursor = "not-allowed";
                     claimBtn.innerText = "Non ancora disponibile";
                     modalDesc.innerHTML = `<p>Questo regalo si sbloccherà il <strong>${dayNumber} Febbraio 2026</strong></p>`;
+
+                    // Disabilita animazione idle per i giorni non disponibili
+                    giftImage.style.animation = "none";
+                    vibrationFx.forEach(fx => fx.style.display = "none");
+                    return; // IMPORTANTE: non permettere ulteriori azioni
                 }
 
                 // === CASO 3: DISPONIBILE E NON APERTO ===
                 // Gestione audio per l'animazione idle (jumpingGift)
-                if (isAvailable && !giaAperto) {
+                if (!giaAperto) {
                     setTimeout(() => {
                         if (!giftImage.classList.contains('opened') && modal.classList.contains('active')) {
                             playSfx('shake', 1.2);
@@ -306,7 +335,8 @@ if (dayBoxes.length > 0 && modal) {
                     };
 
                     // PRIMA di startFinalSequence, aggiorna Firebase con aperto: true
-                    database.ref(`letterine/${dayNumber}`).update({ aperto: true }).then(() => {
+                    database.ref(`${letterineBasePath}/${dayNumber}`).update({ aperto: true }).then(() => {
+                        console.log(`[Firebase] Aggiornato aperto=true per giorno ${dayNumber}`);
                         // Aggiorna anche la cache locale e la classe sul box
                         if (letterineCache[dayNumber]) {
                             letterineCache[dayNumber].aperto = true;
