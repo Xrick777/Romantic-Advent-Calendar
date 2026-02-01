@@ -12,6 +12,35 @@ const firebaseConfig = {
     measurementId: "G-WW0GL67W09"
 };
 
+// ========================
+// IMAGE PRELOADING
+// ========================
+const imagesToPreload = [
+    'images/lightmodebg.png',
+    'images/darkmodebg.png',
+    'images/heresemptylight.png',
+    'images/heresemptydark.png',
+    'images/giftlight.png',
+    'images/giftdark.png',
+    'images/light_vibrationfx.png',
+    'images/dark_vibrationfx.png',
+    'images/crample.png',
+    'images/midcrample.png',
+    'images/opened.png',
+    'images/lookinuplight.png'
+];
+
+function preloadImages() {
+    imagesToPreload.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+    console.log('[System] Avviato precaricamento immagini...');
+}
+
+// Avvia immediatamente il precaricamento
+preloadImages();
+
 // Inizializza Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
