@@ -16,6 +16,8 @@ const firebaseConfig = {
 // IMAGE PRELOADING
 // ========================
 const imagesToPreload = [
+    'images/stvalentine.png',
+    'images/stvalentinemobile.png',
     'images/lightmodebg.png',
     'images/darkmodebg.png',
     'images/heresemptylight.png',
