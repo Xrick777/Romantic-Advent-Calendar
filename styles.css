@@ -163,8 +163,10 @@ body {
 
 #main-form {
     width: 70%;
-    height: 90vh;
+    min-height: 90vh;
+    height: auto;
     margin: 130px auto 0;
+    padding-bottom: 60px;
 }
 
 .container {
@@ -176,7 +178,7 @@ body {
 
 
 
-.san-valentino {
+.san-valentino, .trofei {
     width: 100%;
     height: 100%;
     background-color: var(--bg);
@@ -191,12 +193,12 @@ body {
     overflow: hidden;
 }
 
-.san-valentino:hover {
+.san-valentino:hover, .trofei:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.san-valentino:active {
+.san-valentino:active, .trofei:active {
     transform: scale(0.98);
 }
 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trofei della coppia</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+
+    <!-- Script bloccante per prevenire il flash della light mode -->
+    <script>
+        (function () {
+            const theme = localStorage.getItem("theme");
+            if (theme === "dark") {
+                document.documentElement.classList.add("dark-theme");
+                document.body?.classList.add("dark-theme");
+            }
+        })();
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Firebase SDK v9+ (compat mode) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <section id="header">
+        <h3><i class="fa-brands fa-gratipay"></i> <span class="header-text">Calendario dell'amore</span></h3>
+        <div>
+            <input type="checkbox" class="checkbox" id="checkbox">
+            <label for="checkbox" class="checkbox-label">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+                <span class="ball"></span>
+            </label>
+        </div>
+    </section>
+
+    <section id="main-form">
+        <div class="container calendar-page-container">
+            <!-- Ritorno alla home -->
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Torna alla Home
+            </a>
+
+            <div class="trofei calendar-card-full">
+                <!-- Sezione Trofei Vuota -->
+                <div style="text-align: center; padding: 40px; color: var(--text);">
+                    <i class="fa-solid fa-trophy" style="font-size: 3rem; color: #ffd700; margin-bottom: 20px;"></i>
+                    <h2>Trofei della coppia</h2>
+                    <p>I vostri trofei e traguardi appariranno qui!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
